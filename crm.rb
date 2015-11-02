@@ -105,7 +105,7 @@ class CRM
 		print "Are you sure? yes or no: "
 		confirmation = gets.chomp
 
-		if confirmation == yes
+		if confirmation == "yes"
 			Contact.all.each do |remove_contact|
 				if contact_del == remove_contact.id
 					 Contact.all.delete(remove_contact)
