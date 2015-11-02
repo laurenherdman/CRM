@@ -19,7 +19,7 @@ class CRM
 	def main_menu
 		while true
 			print_main_menu
-			print "Choose and option: "
+			print "Choose an option: "
 			user_input = gets.chomp.to_i
 			break if user_input == 7
 			choose_option(user_input)
