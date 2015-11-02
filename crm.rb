@@ -12,7 +12,8 @@ class CRM
 		puts "3. Display contact"
 		puts "4. Display contact attribute"
 		puts "5. Delete a contact"
-		puts "6. Exit"
+		puts "6. Modify a contact"
+		puts "7. Exit"
 	end
 
 	def main_menu
@@ -20,7 +21,7 @@ class CRM
 			print_main_menu
 			print "Choose and option: "
 			user_input = gets.chomp.to_i
-			break if user_input == 6
+			break if user_input == 7
 			choose_option(user_input)
 		end
 	end
@@ -32,6 +33,7 @@ class CRM
 		when 3 then display_contact
 		when 4 then display_contact_attribute
 		when 5 then delete_contact
+		when 6 then modify_contact
 		else
 			"NOT VALID"
 		end
@@ -100,19 +102,54 @@ class CRM
 	def delete_contact
 		print "Which contact do you wish to delete? "
 		contact_del = gets.chomp.to_i
+		print "Are you sure? yes or no: "
+		confirmation = gets.chomp
 
-		Contact.all.each do |remove_contact|
-			if contact_del == remove_contact.id
-				 Contact.all.delete(remove_contact)
-			else
-				"Not a valid input"
+		if confirmation == yes
+			Contact.all.each do |remove_contact|
+				if contact_del == remove_contact.id
+					 Contact.all.delete(remove_contact)
+				else
+					"Not a valid input"
+				end
+
 			end
-
+		else
+			main_menu
 		end
 	end
 
+	def modify_contact
+		print "Which contact do you wish to modify? "
+		contact_mod = gets.chomp.to_i
+		print "Are you sure? yes or no: "
+		confirmation = gets.chomp
+		if confirmation == "yes"
+			print "First name: "
+			new_first_name = gets.chomp
 
+			print "Last Name: "
+			new_last_name = gets.chomp
 
+			print "Email: "
+			new_email = gets.chomp
+
+			print "Notes: "
+			new_notes = gets.chomp
+			Contact.all.each do |new_contact|
+				if contact_mod == new_contact.id
+					new_contact.first_name = new_first_name
+					new_contact.last_name = new_last_name
+					new_contact.email = new_email
+					new_contact.notes = new_notes
+				else
+					"Not a valid input"
+				end
+			end
+		else
+			main_menu
+		end
+	end
 end
 
 my_awesome_crm = CRM.new('Bitmaker CRM')
